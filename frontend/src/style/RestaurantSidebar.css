@@ -1,0 +1,448 @@
+
+/* =========================================
+   SHARED RESTAURANT SIDEBAR
+   ========================================= */
+
+.restaurant-sidebar {
+  --rs-primary: var(--theme-primary, #c65d3a);
+  --rs-background: #172b2b;
+  --rs-surface: #203737;
+  --rs-text: #f5f5ef;
+  --rs-muted: #a7b8b4;
+  --rs-border: rgba(255, 255, 255, 0.09);
+
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 265px;
+  height: 100vh;
+  padding: 25px 17px 18px;
+  overflow-y: auto;
+  color: var(--rs-text);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(74, 133, 120, 0.2), transparent 35%),
+    linear-gradient(165deg, #1d3534 0%, #142625 55%, #10201f 100%);
+  border-right: 1px solid var(--rs-border);
+  box-shadow: 8px 0 35px rgba(15, 35, 33, 0.12);
+  scrollbar-width: thin;
+  scrollbar-color: #526d68 transparent;
+  animation: rs-slide-in 0.55s ease both;
+  font-family: inherit;
+}
+
+@keyframes rs-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* BRAND */
+
+.rs-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 5px 24px;
+  border-bottom: 1px solid var(--rs-border);
+}
+
+.rs-brand-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(135deg, var(--rs-primary), #e39b69);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+  font-size: 23px;
+  transition: transform 0.3s ease;
+}
+
+.rs-brand:hover .rs-brand-icon {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.rs-brand-text h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.rs-brand-text span {
+  display: block;
+  margin-top: 5px;
+  color: #9db2ac;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+/* RESTAURANT PROFILE */
+
+.rs-restaurant {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 22px 0 25px;
+  padding: 13px 11px;
+  border: 1px solid var(--rs-border);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.055);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.rs-restaurant:hover {
+  background: rgba(255, 255, 255, 0.09);
+  transform: translateY(-2px);
+}
+
+.rs-restaurant-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(135deg, var(--rs-primary), #e39b69);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.rs-restaurant-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.rs-restaurant-info span {
+  color: #91aaa3;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.rs-restaurant-info strong {
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rs-online-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #65d69a;
+  box-shadow: 0 0 0 4px rgba(101, 214, 154, 0.12);
+  animation: rs-pulse 2s infinite;
+}
+
+@keyframes rs-pulse {
+  50% {
+    box-shadow: 0 0 0 7px rgba(101, 214, 154, 0);
+  }
+}
+
+/* NAVIGATION */
+
+.rs-nav-heading {
+  margin: 0 0 11px 11px;
+  color: #829b94;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.rs-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rs-nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 46px;
+  padding: 0 13px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: #c0cfca;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.rs-nav-link:hover:not(.rs-disabled) {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+
+.rs-nav-link.active {
+  color: #fff;
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--rs-primary) 30%, transparent),
+    color-mix(in srgb, var(--rs-primary) 12%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--rs-primary) 42%, transparent);
+  box-shadow: inset 3px 0 0 var(--rs-primary);
+}
+
+.rs-nav-icon {
+  display: grid;
+  place-items: center;
+  width: 23px;
+  flex-shrink: 0;
+  color: #a8c0b8;
+  font-size: 21px;
+  line-height: 1;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.rs-nav-link:hover .rs-nav-icon {
+  color: #fff;
+  transform: scale(1.13);
+}
+
+.rs-nav-link.active .rs-nav-icon {
+  color: #fff;
+}
+
+.rs-nav-label {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rs-active-indicator {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transform: translateY(-50%) scale(0);
+  transition: all 0.25s ease;
+}
+
+.rs-nav-link.active .rs-active-indicator {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* FUTURE FEATURES */
+
+.rs-disabled {
+  opacity: 0.43;
+  cursor: not-allowed;
+}
+
+.rs-coming-soon {
+  padding: 3px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  color: #a9b9b4;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+/* BOTTOM AREA */
+
+.rs-sidebar-bottom {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.rs-help-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 17px;
+  padding: 13px 11px;
+  border: 1px solid var(--rs-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.rs-help-icon {
+  color: #e7b27f;
+  font-size: 19px;
+}
+
+.rs-help-card strong {
+  color: #e9f0ed;
+  font-size: 11px;
+}
+
+.rs-help-card p {
+  margin: 5px 0 0;
+  color: #9bb0a9;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.rs-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid rgba(239, 125, 111, 0.18);
+  border-radius: 10px;
+  color: #ffc0b8;
+  background: rgba(239, 125, 111, 0.07);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.rs-logout-btn:hover {
+  color: #fff;
+  background: rgba(214, 86, 76, 0.24);
+  border-color: rgba(239, 125, 111, 0.45);
+  transform: translateY(-2px);
+}
+
+.rs-logout-icon {
+  width: 23px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.rs-logout-btn .rs-nav-label {
+  text-align: left;
+}
+
+.rs-version {
+  margin-top: 16px;
+  color: #718b83;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+/* MAIN PAGE SPACE
+   Apply this class to the content wrapper on each page. */
+
+.restaurant-content-area {
+  min-width: 0;
+  min-height: 100vh;
+  margin-left: 265px;
+  width: calc(100% - 265px);
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .restaurant-sidebar {
+    width: 76px;
+    padding: 20px 9px 14px;
+    align-items: center;
+  }
+
+  .rs-brand {
+    justify-content: center;
+    width: 100%;
+    padding: 0 0 20px;
+  }
+
+  .rs-brand-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .rs-brand-text,
+  .rs-restaurant-info,
+  .rs-online-dot,
+  .rs-nav-heading,
+  .rs-nav-label,
+  .rs-active-indicator,
+  .rs-coming-soon,
+  .rs-help-card,
+  .rs-version {
+    display: none;
+  }
+
+  .rs-restaurant {
+    justify-content: center;
+    width: 100%;
+    margin: 19px 0;
+    padding: 8px 0;
+  }
+
+  .rs-restaurant-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .rs-navigation {
+    width: 100%;
+    align-items: center;
+  }
+
+  .rs-nav-link {
+    justify-content: center;
+    width: 52px;
+    min-height: 48px;
+    padding: 0;
+  }
+
+  .rs-nav-icon {
+    font-size: 22px;
+  }
+
+  .rs-logout-btn {
+    justify-content: center;
+    width: 52px;
+    padding: 0;
+  }
+
+  .restaurant-content-area {
+    margin-left: 76px;
+    width: calc(100% - 76px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-sidebar,
+  .rs-online-dot {
+    animation: none;
+  }
+
+  .restaurant-sidebar *,
+  .restaurant-sidebar *::before,
+  .restaurant-sidebar *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
